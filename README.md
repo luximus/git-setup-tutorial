@@ -1,6 +1,6 @@
 # Learning Git and GitHub
 
-These instructions will guide you through installing and configuring a source code version control system called Git on your computer, setting up your access to the [GitHub](https://github.com) code repository, creating a project, and making some changes to it.
+Team 3245 and 3166 use Git and GitHub for source code version control. These instructions will guide you through installing and configuring Git on your personal computer and setting up your access to the [GitHub](https://github.com) code repository.
 
 Version control systems maintain a history of all changes made to your software development project. The biggest benefit of using one is that you can easily back out changes to your code if you really mess things up (everyone does at some point). They also allow teams of programmers to make changes to the code at the same time and provide support for merging the changes together. Furthermore, modern version control systems can synchronize changes to your project between multiple copies stored on different servers. Git is probably the most popular version control system, and GitHub wraps Git in an easy-to-use website. GitHub makes it easy to create a remotely hosted copy of a project, free of charge in many cases, and share it with others. As a result, GitHub has become the defacto standard for hosting open source software projects.
 
@@ -16,7 +16,9 @@ The first step is to [create a GitHub account](https://github.com/signup).
 
 On Mavericks (10.9) or newer, try to run Git from the Terminal:
 
-```$ git --version```
+```
+git --version
+```
 
 If you don’t have Git already, Terminal will prompt you to install it. The rest of what you need is installed by default or will be installed along with Git. You can skip down to "Create a SSH key."
 
@@ -29,6 +31,10 @@ Go to [this link](https://git-scm.com/download/win) and the download will start 
 ## Install Windows Terminal
 
 Go to the Microsoft Store, search for Windows Terminal, and install it. It is free of charge from Microsoft. You will probably want to set Terminal's default shell to PowerShell, which is far superior to the regular command prompt. There is also a built in PowerShell app in Windows that you can use, but Terminal is much nicer. For example, Terminal supports normal cut, copy, and paste keyboard shortcuts, not to mention theming.
+
+## SSH or HTTPS?
+
+When working on a project, you have to *clone* it onto your computer. This is done using one of two services: HTTPS or SSH. HTTPS requires no additional setup, but is slightly less secure and, according to some, has caused issues down the road. SSH is more secure, but can cause issues when working on corporate networks and requires significant setup. There is no consensus on either option, so the following sections show how to set up SSH on our computer. If you would like to use HTTPS, skip to "Configuring Git."
 
 ## Install OpenSSH Client on Windows
 
@@ -86,7 +92,9 @@ Open Services as an administrator (from any user account, search for Services in
 
 ## Add your public key to SSH Agent (all platforms)
 
-As promised, if you do this step, you will not have to enter your key's passphrase every time it is used. In Terminal, from your `.ssh` directory run `ssh-add id_ed25519` or `ssh-add id_rsa` depending on which file you generated above. Enter the passphrase when prompted, and you should see an Identity added message. On macOS, you can also use `ssh-add --apple-use-keychain <private key filename>` to use Apple's Keychain feature. You can check if it worked by opening Keychain Access and searching for a password called `'SSH: <private key filename>'`.
+As promised, if you do this step, you will not have to enter your key's passphrase every time it is used. In Terminal, from your `.ssh` directory run `ssh-add id_ed25519` or `ssh-add id_rsa` depending on which file you generated above. Enter the passphrase when prompted, and you should see an Identity added message.
+
+On macOS, you can also use `ssh-add --apple-use-keychain <private key filename>` to use Apple's Keychain feature. You can check if it worked by opening Keychain Access and searching for a password called `'SSH: <private key filename>'`.
 
 ## Make sure it worked
 
@@ -100,32 +108,16 @@ git config --global user.name "<Your name>"
 git config --global user.email "<Your email address>"
 ```
 
-## Create a new repository
+## Configure VS Code to use GitHub
 
-In your GitHub account, click Repositories, and then click the New button. Give your repository a name and description, and select whether you want it to be public or private. Check Add a README file, and then click the Create Repository button at the bottom.
+Go to the Source Control tab in the sidebar and click "Clone Repository" (or, using the Command Palette, run the command "Git: Clone"). Click "Clone from GitHub;" you will be asked to authenticate using your GitHub account. If you have multiple versions of Visual Studio Code installed, make sure to open the authentication link in the right version.
 
-## Copy your repository on to your computer
-
-On your repository's main page, click the Code button, and click the Copy button to the right of the string starting with `git@github.com...`. In your Terminal, cd to a directory in which to put your repository, and type `git clone <repository url>`, substituting `<repository url>` with the string you just copied. Your repository, containing the README file, will now appear on your computer.
-
-## Edit your README
-
-Open the README file in a text editor, and add some text about your project. Save and close it.
-
-## Add your changes to your repository
-
-Back in Terminal, `cd` into the repository, and type `git add .` to stage the changes you just made to your README file. Git will do nothing with your changes and additions until you stage them. Warning, the `git add .` command will suck up *any* changes you make to any files in that directory, including any new files that you have added to the directory, so be careful. To help you out, git will list the files it staged so you can check whether any files were staged in error. You can replace `.` with the path to a file if you want to stage a specific file and ignore the rest. After you have confirmed that git staged the correct file(s), place any staged files into the repository by typing `git commit -m "<a message>"`, substituting `<a message>` with a brief description of what you changed.
-
-Now your changes are stored locally on your hard drive. You can continue to stage and commit changes locally. However, you should frequently (ideally daily) share your changes with your team. You do that with the `push` command. Type `git push`, and then refresh your browser to see the changes to your README! If `git push` resulted in an error, try the full version of this command, `git push origin main` (`origin` refers to GitHub, and `main` refers to the default branch of your code -- see below for more about branches).
-
-## Making changes to a team project
-
-So, you've decided to work with a team on a new project. One way to divide up work is for each of you to create a branch for your changes, called a feature branch. You work on your changes, committing and pushing your changes as you go. When your team decides that your changes are ready, you merge them into the main branch, typically called `main`. Note that older GitHub projects may use `master` as the default main branch, but anything new will use `main` by default. Some projects have more complicated branching schemes, but this one is useful as a starting point.
-
-To create a feature branch, type `git checkout -b <branch_name>`, substituting `<branch_name>` with the name of your branch. It's a good idea to include in the branch name your name and a two or three word description of what you are doing.
+You'll also find some additional extensions useful. Install the Git Graph extension from the extensions marketplace (it's free).
 
 ## Next steps
 
-This concludes the introduction to Git and GitHub. There are lots of tutorials and documentation about Git and GitHub online, and there is much more to learn. If you are using a code editor like Visual Studio Code or an integrated development environment like IntelliJ, it will have built in Git support that hides all of Git's complexity behind menus and windows. Some even have GitHub support, which will make using Git even easier. However, after you get started with the basics, it is important to learn what is happening under the hood. One of the better sources of information about Git is the Git Book, found [here](https://git-scm.com/book/en/v2).
+This concludes the installation and configuration guide. Next, you can watch the official Team 3245 tutorials for using Git and GitHub.
+
+There are also lots of tutorials and documentation about Git and GitHub online, and there is much more to learn. One of the better sources of information about Git is the Git Book, found [here](https://git-scm.com/book/en/v2).
 
 Happy coding!
