@@ -116,8 +116,6 @@ You'll also find some additional extensions useful. Install the Git Graph extens
 
 ## Next steps
 
-This concludes the installation and configuration guide. Next, you can watch the official Team 3245 tutorials for using Git and GitHub.
-
-There are also lots of tutorials and documentation about Git and GitHub online, and there is much more to learn. One of the better sources of information about Git is the Git Book, found [here](https://git-scm.com/book/en/v2).
+This concludes the installation and configuration guide. There are lots of tutorials and documentation about Git and GitHub online, and there is much more to learn. Visual Studio Code and other integrated development environments like IntelliJ have built in Git support that hides all of Git's complexity behind menus and windows. Including VS Code, some even have GitHub support, which will make using Git even easier. However, after you get started with the basics, it is important to learn what is happening under the hood. One of the better sources of information about Git is the Git Book, found [here](https://git-scm.com/book/en/v2).
 
 Happy coding!
